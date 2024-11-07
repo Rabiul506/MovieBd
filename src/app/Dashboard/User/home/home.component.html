@@ -11,7 +11,8 @@
                 <div class="text-3xl text-white font-semibold text-left underline decoration-1 underline-offset-4">Series</div>
             </div>
             <div class="flex flex-row flex-nowrap overflow-x-auto scroll-m-0 gap-x-5 ">
-                @for( movie of movieList; track movie; let i = $index ){
+                @for( movie of tempMovies; track movie; let i = $index ){
+
                     <!-- <div class="rounded-lg hover:scale-110 hover:transition-all  duration-150 w-[340px] h-52 border-orange-500 border bg-no-repeat bg-contain relative" [ngStyle]="{ 'background-image': 'url(' + movie.images + ')' }" >
                        
                         <div class="absolute inset-0">
@@ -25,7 +26,7 @@
                  
                  <!-- Overlay for title and other details -->
                  <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 p-4 flex flex-col justify-end">
-                   <div class="text-white font-bold">{{ movie.title }}</div>
+                   <div class="text-white font-bold" (click)="navigatetoDetail(i)">{{ movie.title }}</div>
                    <div class="text-sm text-gray-300"><span class="text-white font-semibold">Genre : </span> {{ movie.genres }}</div>
                    <div class="text-xs text-gray-400">{{ movie.releaseDate }}</div>
                  </div>
@@ -36,7 +37,7 @@
         </div>
     </div>
 
-    <!-- {{movie.title}}
+    <!--                    {{movie.title}}
                             {{movie.description}}
                             {{movie.releaseDate}}
                             {{movie.genres}} -->

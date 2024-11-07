@@ -1,1 +1,79 @@
-<p>list-item works!</p>
+<div class="mx-10 mt-5 relative">
+    <div class="flex items-center justify-between">
+        <div class="dark:text-gray-800 text-gray-800 text-lg font-semibold ">
+            Add Your movie item 
+        </div>
+
+        <!-- add button  -->
+         <button class="px-10 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-600 dark:bg-orange-500 dark:hover:bg-orange-600 dark:text-white text-white text-sm" (click)="showItem()">
+            Add Item
+         </button>
+    </div>
+
+    <!-- movie list will be add here  -->
+
+    <div class="flex flex-row flex-nowrap overflow-x-auto scroll-m-0 gap-x-5 ">
+        @for( movie of movieList; track movie; let i = $index ){
+            
+            <!-- <div class="rounded-lg hover:scale-110 hover:transition-all  duration-150 w-[340px] h-52 border-orange-500 border bg-no-repeat bg-contain relative" [ngStyle]="{ 'background-image': 'url(' + movie.images + ')' }" >
+               
+                <div class="absolute inset-0">
+                    <div class="">fine</div>
+                    
+                </div>
+            </div> -->
+
+            <div class="relative w-80 h-52 flex-shrink-0 rounded-lg hover:scale-110 z-40 overflow-hidden bg-cover bg-center hover:transition-all duration-300"
+            [ngStyle]="{ 'background-image': 'url(' + movie.images + ')' }">
+         
+         <!-- Overlay for title and other details -->
+         <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 p-4 flex flex-col justify-end">
+           <div class="text-white font-bold">{{ movie.title }}</div>
+           <div class="text-sm text-gray-300"><span class="text-white font-semibold">Genre : </span> {{ movie.genres }}</div>
+           <div class="text-xs text-gray-400">{{ movie.releaseDate }}</div>
+         </div>
+       </div>
+        }
+    </div>
+     
+</div>
+
+<!-- movie add item by ng-template  -->
+
+@if(isItem == false){
+
+    <div class="mt-10 h-screen w-screen flex items-center justify-center  dark:bg-gray-800 bg-white">
+        <!-- forms details  -->
+         <form  [formGroup]="addItemForm" (ngSubmit)="saveMovie()">
+            <div class="rounded-lg shadow-gray-700 shadow-md dark:shadow-teal-300 w-[350px] p-3">
+    
+                <div class="mb-4">
+                    <label class="block dark:text-white text-gray-700">Title</label>
+                    <input formControlName="title" type="text" class="w-full border rounded px-2 py-1" />
+                  </div>
+                  <div class="mb-4">
+                    <label class="block dark:text-white text-gray-700">Description</label>
+                    <textarea formControlName="description" class="w-full border rounded px-2 py-1 line-clamp-2"></textarea>
+                  </div>
+                  <div class="mb-4">
+                    <label class="block dark:text-white text-gray-700">Image</label>
+                    <input type="file" (change)="onImageSelected($event)" class="w-full border rounded px-2 py-1" />
+                  </div>
+                  <div class="mb-4">
+                    <label class="block dark:text-white text-gray-700">Genres</label>
+                    <input formControlName="genres" type="text" class="w-full border rounded px-2 py-1" />
+                  </div>
+                  <div class="mb-4">
+                    <label class="block dark:text-white text-gray-700">Release Date</label>
+                    <input formControlName="releaseDate" type="date" class="w-full border rounded px-2 py-1" />
+                  </div>
+                  <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded" (click)="onSubmit()">
+                    Save Movie
+                  </button>
+            </div>
+         </form>
+    
+    </div>
+}@else {
+    <div class="mt-10 text-center py-5 text-lg font-semibold text-gray-700"> Your list is empty ! Add some Movie in Your List</div>
+}
