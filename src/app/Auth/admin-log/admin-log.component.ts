@@ -1,16 +1,16 @@
-import { AuthServiceService } from './../auth-service.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthServiceService } from '../auth-service.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-admin-log',
   standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  templateUrl: './admin-log.component.html',
+  styleUrl: './admin-log.component.scss'
 })
-export class LoginComponent implements OnInit{
+export class AdminLogComponent {
   loginForm: FormGroup;
 
   username = '';
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit{
     private router: Router,
     private authServiceService: AuthServiceService,
   ){
-
+    
     this.loginForm = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
