@@ -10,37 +10,47 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
+  loginForm: FormGroup;
+
+  username = '';
+  password = '';
 
   constructor(
     private router: Router,
     private authServiceService: AuthServiceService,
   ) { }
 
-  loginForm = new FormGroup({
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
-  })
+    this.loginForm = new FormGroup({
+      username: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+    })
+  }
 
   navigateToSignUp() {
     this.router.navigate(['/signUp']);
   }
 
-  onLogIn() {
-    const index = this.authServiceService.signupData.findIndex(
-      x => x.username === this.loginForm.value.username
-    )
+  onLogIn(){
+   const logUser = this.authServiceService.login(this.username, this.password)
 
-    if (index !== -1 && this.authServiceService.signupData[index].password === this.loginForm.value.password) {
-      this.router.navigate(['/home'])
-      console.log("Login successful");
-    }
-    else if (index == -1) {
-      console.log("Username not found");
-    }
-    else {
-      console.log('Password is incorrect');
-    }
+   if(logUser){
+  //   this.router.navigate(['/home'])
+  //  }else{
+  //    alert('Invalid Credintial')
+  //  }
+  const role = this.authServiceService.getUserRole();
+  if (role === 'admin') {
+    this.router.navigate(['/list-item']);
+  } else {
+    this.router.navigate(['/home']);
+  }
+} else {
+  alert('Invalid username or password!');
+  }
+}
+
+  ngOnInit(): void {
 
   }
 }
