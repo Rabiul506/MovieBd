@@ -1,6 +1,6 @@
 import { MovieItem } from './../../User/itemData';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { MovieListService } from '../movie-list.service';
 // import { MovieItem } from '../../User/itemData';
@@ -12,7 +12,7 @@ import { MovieListService } from '../movie-list.service';
   templateUrl: './list-item.component.html',
   styleUrl: './list-item.component.scss'
 })
-export class ListItemComponent {
+export class ListItemComponent implements OnInit{
 
   isItem: boolean = true;
   movieList: Array<any> = [];
@@ -22,6 +22,11 @@ export class ListItemComponent {
   showItem(){
     this.isItem = !this.isItem;
   }
+
+  ngOnInit() {
+    this.movieList = this.ml.movieList;
+  
+  }
  
 
   addItemForm: FormGroup;
@@ -30,8 +35,10 @@ export class ListItemComponent {
     private ml: MovieListService,
     private fb: FormBuilder,
    ){
-    this.movieList = this.ml.movieList,
-    
+      const temperMovieList = localStorage.getItem('movieLocal')
+
+      this.ml.movieList = temperMovieList? JSON.parse(temperMovieList): [];
+
 
     // this.addItemForm = new FormGroup({
     //   title: new FormControl('', Validators.required),
@@ -43,7 +50,7 @@ export class ListItemComponent {
     this.addItemForm = this.fb.group({
       title: [''],
       description: [''],
-      image: [null] , // Placeholder for image data
+      image: ['/assets/images/virus.webp'] , // Placeholder for image data
       genres: [''],
       releaseDate: [''],
     });
@@ -66,78 +73,15 @@ export class ListItemComponent {
     }
   }
 
-  saveMovie() {
-    const movieData = this.addItemForm.value
-
-
-  this.ml.addMovie(movieData);
-  localStorage.setItem('movies', JSON.stringify(this.ml.movieList));
-
-  // this.ml.movieList = [...this.ml.movieList, movieData];
-  
-  this.addItemForm.reset({
-    title: '',
-    description: '',
-    image: null,
-    genres: '',
-    releaseDate: ''
-  });
-
-    // const oldData = localStorage.getItem("movieItem");
-    // if(oldData != null){
-    //   const parseData = JSON.parse(oldData);
-    //   this.movieList.controls['empid']setvalue(parseData.length + 1)
-    // }
-    
-  }
-
-    // Update an item (if needed, specific to structure)
-    updateItem(movie: string, updateFn: (currentValue: any) => any): void {
-      const currentValue = this.getItem(movie);
-      if (currentValue !== null) {
-        const updatedValue = updateFn(currentValue);
-        this.setItem(movie, updatedValue);
-      }
-    }
-  setItem(key: string, updatedValue: any) {
-    throw new Error('Method not implemented.');
-  }
-  // getItem(key: string) {
-  //   throw new Error('Method not implemented.');
-  // }
-    // Read an item
-    getItem(movie: string): any {
-      const item = localStorage.getItem(movie);
-      return item ? JSON.parse(item) : null;
-    }
-
-  removeItem(){
-    this.movieList.splice(0, 1)
+  removeItem(i: number){
+    this.movieList.splice(i, 1)
   }
   // cardOne: any [] = [ ];
   
 onSubmit() {
-  // if(this.cardOne != null){
-  //   this.cardOne.push(this.addItemForm.value)
-  //   }else{
-  //     console.log(this.addItemForm.value)
-  //   }
-
-  //   this.movieList.push(this.cardOne)
-
-  if (this.addItemForm.valid) {
-    this.saveMovie(); // Call saveMovie directly
-  } else {
-    console.warn('Form is invalid');
-  }
+  this.ml.movieList.push(this.addItemForm.value);
+  localStorage.setItem('movieLocal', JSON.stringify(this.ml.movieList))
 }
 
-ngOnInit() {
-  // this.ml.movieListObservable.subscribe(updatedList => {
-  //   this.movieList = updatedList;
-  // });
-  // this.movieList.values
-   
-}
 
 }
