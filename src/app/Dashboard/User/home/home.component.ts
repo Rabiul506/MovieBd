@@ -1,18 +1,18 @@
 import { MovieListService } from './../../Admin/movie-list.service';
 import { MovieItem } from './../itemData';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../../Shared/navbar/navbar.component';
-import { NgStyle } from '@angular/common';
+import { NgIf, NgStyle } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NavbarComponent,NgStyle,RouterLink],
+  imports: [NavbarComponent,NgStyle],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
 
 movieList: any;
 
@@ -27,6 +27,11 @@ movieList: any;
   navigatetoDetail(i: number){
     const newTitle = this.ml.movieList[i].title.toLowerCase().replaceAll(' ', '-')
     this.router.navigate(['/detail', { id: this.ml.movieList[i].id, title: newTitle }])
+  }
+
+  ngOnInit() {
+    const storedMovies = JSON.parse(localStorage.getItem('movies') || '[]');
+    this.tempMovies = storedMovies.length ? storedMovies : this.ml.getMovies();
   }
 }
 
