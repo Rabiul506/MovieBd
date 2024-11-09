@@ -14,7 +14,6 @@ export class SignUpComponent {
   constructor(
     private router: Router,
     private authServiceService: AuthServiceService,
-<<<<<<< HEAD
   ) { }
 
   registrationForm = new FormGroup({
@@ -24,16 +23,6 @@ export class SignUpComponent {
     role: new FormControl('', Validators.required)
   })
 
-=======
-   
-  ){
-    this.registrationForm = new FormGroup({
-      email: new FormControl('', Validators.required),
-      name: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
-    })
-  }
->>>>>>> b8b829c (signUp changes)
 
   navigateToLogin() {
     this.router.navigate(['/login']);
