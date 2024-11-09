@@ -18,7 +18,7 @@ export class LoginComponent {
   ) { }
 
   loginForm = new FormGroup({
-    username: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
   })
 
@@ -28,12 +28,15 @@ export class LoginComponent {
 
   onLogIn() {
     const index = this.authServiceService.signupData.findIndex(
-      x => x.username === this.loginForm.value.username
+      x => x.email === this.loginForm.value.email
     )
 
     if (index !== -1 && this.authServiceService.signupData[index].password === this.loginForm.value.password) {
+      this.authServiceService.loggedInAs = this.authServiceService.signupData[index].role;
+      localStorage.setItem('loggedInAsLocal', JSON.stringify(this.authServiceService.loggedInAs));
+
+      console.log("Login successful")
       this.router.navigate(['/home'])
-      console.log("Login successful");
     }
     else if (index == -1) {
       console.log("Username not found");
@@ -41,6 +44,5 @@ export class LoginComponent {
     else {
       console.log('Password is incorrect');
     }
-
   }
 }

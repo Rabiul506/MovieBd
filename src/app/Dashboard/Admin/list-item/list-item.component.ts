@@ -12,50 +12,37 @@ import { MovieListService } from '../movie-list.service';
   templateUrl: './list-item.component.html',
   styleUrl: './list-item.component.scss'
 })
-export class ListItemComponent implements OnInit{
+export class ListItemComponent implements OnInit {
+
+  constructor(
+    private ml: MovieListService,
+    private fb: FormBuilder,
+  ) {
+    const temperMovieList = localStorage.getItem('movieLocal')
+
+    this.ml.movieList = temperMovieList ? JSON.parse(temperMovieList) : [];
+
+    this.addItemForm = this.fb.group({
+      title: [''],
+      description: [''],
+      image: ['/assets/images/virus.webp'],
+      genres: [''],
+      releaseDate: [''],
+    });
+  }
 
   isItem: boolean = true;
   movieList: Array<any> = [];
-  // movieList: MovieListService [] = [];
 
-
-  showItem(){
+  showItem() {
     this.isItem = !this.isItem;
   }
 
   ngOnInit() {
     this.movieList = this.ml.movieList;
-  
   }
- 
 
   addItemForm: FormGroup;
-
-  constructor(
-    private ml: MovieListService,
-    private fb: FormBuilder,
-   ){
-      const temperMovieList = localStorage.getItem('movieLocal')
-
-      this.ml.movieList = temperMovieList? JSON.parse(temperMovieList): [];
-
-
-    // this.addItemForm = new FormGroup({
-    //   title: new FormControl('', Validators.required),
-    //   description: new FormControl('', Validators.required),
-    //   images : new FormArray([]),
-    //   genres: new FormControl('', Validators.required),
-    //   releaseDate: new FormControl('', Validators.required)
-    // })
-    this.addItemForm = this.fb.group({
-      title: [''],
-      description: [''],
-      image: ['/assets/images/virus.webp'] , // Placeholder for image data
-      genres: [''],
-      releaseDate: [''],
-    });
-  }
-  // tempMovies!: any []
 
   onImageSelected(event: Event) {
 
@@ -63,25 +50,22 @@ export class ListItemComponent implements OnInit{
     if (input.files && input.files.length) {
       const file = input.files[0];
       const reader = new FileReader();
-      
+
       reader.onload = () => {
         this.addItemForm.patchValue({
-          image: reader.result // Set the Base64 string as the form control value
+          image: reader.result
         });
       };
       reader.readAsDataURL(file);
     }
   }
 
-  removeItem(i: number){
+  removeItem(i: number) {
     this.movieList.splice(i, 1)
   }
-  // cardOne: any [] = [ ];
-  
-onSubmit() {
-  this.ml.movieList.push(this.addItemForm.value);
-  localStorage.setItem('movieLocal', JSON.stringify(this.ml.movieList))
-}
 
-
+  onSubmit() {
+    this.ml.movieList.push(this.addItemForm.value);
+    localStorage.setItem('movieLocal', JSON.stringify(this.ml.movieList))
+  }
 }

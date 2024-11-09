@@ -6,7 +6,7 @@ import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [ReactiveFormsModule,RouterLink],
+  imports: [ReactiveFormsModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss'
 })
@@ -17,10 +17,10 @@ export class SignUpComponent {
   ) { }
 
   registrationForm = new FormGroup({
-    email: new FormControl('', Validators.required),
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
-    role: new FormControl('', Validators.required)
+    email: new FormControl('', { nonNullable: true, validators: Validators.required }),
+    name: new FormControl('', { nonNullable: true, validators: Validators.required }),
+    password: new FormControl('', { nonNullable: true, validators: Validators.required }),
+    role: new FormControl('', { nonNullable: true, validators: Validators.required })
   })
 
 
@@ -44,5 +44,6 @@ export class SignUpComponent {
     } else {
       console.log('User already exist');
     }
+    this.registrationForm.reset()
   }
 }
