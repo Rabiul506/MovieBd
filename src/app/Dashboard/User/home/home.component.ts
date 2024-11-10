@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../../Shared/navbar/navbar.component';
 import { NgIf, NgStyle } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,7 @@ movieList: any;
      this.tempMovies = this.ml.movieList
   }
   tempMovies!: any []
+
 
 
   navigatetoDetail(i: number){
