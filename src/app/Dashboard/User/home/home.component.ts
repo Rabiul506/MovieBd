@@ -8,31 +8,25 @@ import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NavbarComponent,NgStyle],
+  imports: [NavbarComponent, NgStyle],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit{
 
-movieList: any;
+export class HomeComponent implements OnInit {
 
-  constructor(private ml: MovieListService ,
-    private router: Router,
-  ){
-     this.tempMovies = this.ml.movieList
-  }
-  tempMovies!: any []
+  movieList: any;
 
+  constructor(public ml: MovieListService, private router: Router,) { }
 
-  navigatetoDetail(i: number){
+  navigatetoDetail(i: number) {
     const newTitle = this.ml.movieList[i].title.toLowerCase().replaceAll(' ', '-')
     this.router.navigate(['/detail', { id: this.ml.movieList[i].id, title: newTitle }])
   }
 
   ngOnInit() {
-    const storedMovies = JSON.parse(localStorage.getItem('movies') || '[]');
-    this.tempMovies = storedMovies.length ? storedMovies : this.ml.getMovies();
   }
+
 }
 
 
