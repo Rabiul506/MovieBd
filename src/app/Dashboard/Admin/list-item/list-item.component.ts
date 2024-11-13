@@ -15,7 +15,7 @@ import { MovieListService } from '../movie-list.service';
 export class ListItemComponent implements OnInit{
 
   isItem: boolean = true;
-  movieList: Array<any> = [];
+  movieList: MovieItem [] = [];
   // movieList: MovieListService [] = [];
 
 
@@ -25,9 +25,8 @@ export class ListItemComponent implements OnInit{
 
   ngOnInit() {
     this.movieList = this.ml.movieList;
-    // this.ml.movieList = this.movieList
-    // this.movieList = [...this.movieList, this.ml.movieList];
 
+  
   }
  
 
@@ -53,7 +52,7 @@ export class ListItemComponent implements OnInit{
     this.addItemForm = this.fb.group({
       title: [''],
       description: [''],
-      image: ['assets/images/virus.webp'] , // Placeholder for image data
+      image: ['/assets/images/virus.webp'] , // Placeholder for image data
       genres: [''],
       releaseDate: [''],
     });
@@ -76,9 +75,7 @@ export class ListItemComponent implements OnInit{
     }
   }
 
-  removeItem(i: number){
-    this.movieList.splice(i, 1)
-  }
+
   // cardOne: any [] = [ ];
   
 onSubmit() {
@@ -93,6 +90,11 @@ onSubmit() {
   // }
 
   this.addItemForm.reset()
+}
+
+removeItem(i: number){
+  this.ml.removeItem('movieLocal' );
+  this.movieList.splice(i, 1)
 }
 
 // isColor: boolean = false;

@@ -76,6 +76,17 @@ export class MovieListService {
     return this.movieList;
   }
 
+      // Create or update an item
+      setItem(key: string, value: any): void {
+        localStorage.setItem(key, JSON.stringify(value));
+      }
+    
+      // Read an item
+      getItem(key: string): any {
+        const item = localStorage.getItem(key);
+        return item ? JSON.parse(item) : null;
+      }
+
   // Update an item (if needed, specific to structure)
   updateItem(movie: string, updateFn: (currentValue: any) => any): void {
     const currentValue = this.getItem(movie);
@@ -84,16 +95,17 @@ export class MovieListService {
       this.setItem(movie, updatedValue);
     }
   }
-  setItem(key: any, updatedValue: any) {
-    throw new Error('Method not implemented.');
-  }
-  getItem(movie: string) {
-    throw new Error('Method not implemented.');
-  }
 
-  deleteMovie(movie:any, MovieItem:any){
-    // localStorage.removeItem()
-    this.movieList.splice(0, 1)
-    localStorage.removeItem(movie);
-  }
+  // deleteMovie(movie:any, MovieItem:any){
+  //   // localStorage.removeItem()
+  //   this.movieList.splice(0, 1)
+  //   localStorage.removeItem(movie);
+  // }
+
+
+  
+    // Delete an item
+    removeItem(key: string): void {
+      localStorage.removeItem(key);
+    }
 }
