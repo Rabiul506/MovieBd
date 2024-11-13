@@ -24,9 +24,10 @@ export class ListItemComponent implements OnInit{
   }
 
   ngOnInit() {
-    // this.movieList = this.ml.movieList;
-    this.ml.movieList = this.movieList
-  
+    this.movieList = this.ml.movieList;
+    // this.ml.movieList = this.movieList
+    // this.movieList = [...this.movieList, this.ml.movieList];
+
   }
  
 
@@ -40,6 +41,7 @@ export class ListItemComponent implements OnInit{
 
       this.ml.movieList = temperMovieList? JSON.parse(temperMovieList): [];
 
+      // const tempMovie = 
 
     // this.addItemForm = new FormGroup({
     //   title: new FormControl('', Validators.required),
@@ -80,9 +82,24 @@ export class ListItemComponent implements OnInit{
   // cardOne: any [] = [ ];
   
 onSubmit() {
-  this.ml.movieList.push(this.addItemForm.value);
+  const metaMovie = this.addItemForm.value;
+  this.ml.movieList.push(metaMovie);
+  console.log(this.ml.movieList);
+  
   localStorage.setItem('movieLocal', JSON.stringify(this.ml.movieList))
+
+  // resetItem(){
+
+  // }
+
+  this.addItemForm.reset()
 }
+
+// isColor: boolean = false;
+
+// togleColor(){
+//   this.isColor = !this.isColor
+// }
 
 
 }

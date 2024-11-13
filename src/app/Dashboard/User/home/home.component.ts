@@ -20,7 +20,7 @@ movieList: any;
   constructor(private ml: MovieListService ,
     private router: Router,
   ){
-     this.tempMovies = this.ml.movieList
+    //  this.tempMovies = this.ml.movieList
   }
   tempMovies!: any []
 
@@ -34,6 +34,7 @@ movieList: any;
   ngOnInit() {
     const storedMovies = JSON.parse(localStorage.getItem('movies') || '[]');
     this.tempMovies = storedMovies.length ? storedMovies : this.ml.getMovies();
+    this.tempMovies = this.ml.movieList
   }
 }
 

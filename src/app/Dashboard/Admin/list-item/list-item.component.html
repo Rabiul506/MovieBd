@@ -1,101 +1,112 @@
-<div class="mx-10 mt-5 relative">
-  <div class="flex items-center justify-between mb-10">
-    <div class="dark:text-gray-800 text-gray-800 text-lg font-semibold ">
-      Add Your movie item
-    </div>
 
-    <!-- add button  -->
-    <button
-      class="px-10 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-600 dark:bg-orange-500 dark:hover:bg-orange-600 dark:text-white text-white text-sm"
-      (click)="showItem()">
-      Add Item
-    </button>
-  </div>
 
-  <!-- movie list will be add here  -->
+  <!-- <div class="" [ngStyle]="{'background-color': isColor ? 'lightblue' : 'lightgray'}"> -->
 
-  <div class="flex flex-row flex-nowrap overflow-x-auto scroll-m-0 gap-x-5 ">
-    @for( movie of movieList; track movie; let i = $index ){
-
-    <div
-      class="relative w-80 h-52 flex-shrink-0 rounded-lg hover:scale-110 z-40 overflow-hidden bg-cover bg-center hover:transition-all duration-300"
-      [ngStyle]="{ 'background-image': 'url(' + movie.images + ')' }">
-
-      <div
-        class="absolute inset-0 bg-black border bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 p-4 flex flex-col justify-between">
-        <div class="flex items-center justify-between cursor-pointer">
-          <div class="text-green-500 flex justify-start">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-              stroke="currentColor" class="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-            </svg>
-            <div class=" text-white text-sm">Edit</div>
-          </div>
-          <div class="text-red-500 flex justify-start cursor-pointer">
-            <div class=" text-white text-sm" (click)="removeItem(i)">Delete</div>
-
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-              stroke="currentColor" class="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-            </svg>
-
-          </div>
+    <div class="mx-10 mt-5 relative">
+      <div class="flex items-center justify-between mb-10">
+        <div class="dark:text-gray-800 text-gray-800 text-lg font-semibold ">
+          Add Your movie item
         </div>
+    
+        <!-- add button  -->
+        <button
+          class="px-10 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-600 dark:bg-orange-500 dark:hover:bg-orange-600 dark:text-white text-white text-sm"
+          (click)="showItem()">
+          Add Item
+        </button>
 
-        <div class="flex flex-col justify-end">
-          <div class="text-white font-bold">{{ movie.title }}</div>
-          <div class="text-sm text-gray-300"><span class="text-white font-semibold">Genre : </span> {{ movie.genres }}
-          </div>
-          <div class="text-xs text-gray-400">{{ movie.releaseDate }}</div>
-        </div>
+        <!-- <div class="px-5 py-2 bg-cyan-500 text-white text-center text-sm" (click)="togleColor()">
+          change browser color
+        </div> -->
+  
+
       </div>
+    
+      <!-- movie list will be add here  -->
+    
+      <div class="flex flex-row flex-nowrap overflow-x-auto scroll-m-0 gap-x-5 ">
+        @for( movie of movieList; track movie; let i = $index ){
+    
+        <div
+          class="relative w-80 h-52 flex-shrink-0 rounded-lg hover:scale-110 z-40 overflow-hidden bg-cover bg-center hover:transition-all duration-300"
+          [ngStyle]="{ 'background-image': 'url(' + movie.images + ')' }">
+    
+          <div
+            class="absolute inset-0 bg-black border bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 p-4 flex flex-col justify-between">
+            <div class="flex items-center justify-between cursor-pointer">
+              <div class="text-green-500 flex justify-start">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                </svg>
+                <div class=" text-white text-sm">Edit</div>
+              </div>
+              <div class="text-red-500 flex justify-start cursor-pointer">
+                <div class=" text-white text-sm" (click)="removeItem(i)">Delete</div>
+    
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                </svg>
+    
+              </div>
+            </div>
+    
+            <div class="flex flex-col justify-end">
+              <div class="text-white font-bold">{{ movie.title }}</div>
+              <div class="text-sm text-gray-300"><span class="text-white font-semibold">Genre : </span> {{ movie.genres }}
+              </div>
+              <div class="text-xs text-gray-400">{{ movie.releaseDate }}</div>
+            </div>
+          </div>
+        </div>
+        }@empty {
+        <div class="mt-10 text-center py-5 text-lg font-semibold text-gray-700"> Your list is empty ! Add some Movie in Your
+          List</div>
+        }
+      </div>
+    
     </div>
-    }@empty {
-    <div class="mt-10 text-center py-5 text-lg font-semibold text-gray-700"> Your list is empty ! Add some Movie in Your
-      List</div>
+    
+    <!-- movie add item by ng-template  -->
+    
+    @if(isItem == false){
+    
+    <div class="mt-10 h-screen w-screen flex items-center justify-center  dark:bg-gray-800 bg-white">
+      <!-- forms details  -->
+      <form [formGroup]="addItemForm" (ngSubmit)="onSubmit()">
+        <div class="rounded-lg shadow-gray-700 shadow-md dark:shadow-teal-300 w-[350px] p-3">
+    
+          <div class="mb-4">
+            <label class="block dark:text-white text-gray-700">Title</label>
+            <input formControlName="title" type="text" class="w-full border rounded px-2 py-1" />
+          </div>
+          <div class="mb-4">
+            <label class="block dark:text-white text-gray-700">Description</label>
+            <textarea formControlName="description" class="w-full border rounded px-2 py-1 line-clamp-2"></textarea>
+          </div>
+          <div class="mb-4">
+            <label class="block dark:text-white text-gray-700">Image</label>
+            <!-- <img src="/assets/images/virus.webp" alt=""> -->
+            <input type="file" (change)="onImageSelected($event)" class="w-full border rounded px-2 py-1" />
+          </div>
+          <div class="mb-4">
+            <label class="block dark:text-white text-gray-700">Genres</label>
+            <input formControlName="genres" type="text" class="w-full border rounded px-2 py-1" />
+          </div>
+          <div class="mb-4">
+            <label class="block dark:text-white text-gray-700">Release Date</label>
+            <input formControlName="releaseDate" type="date" class="w-full border rounded px-2 py-1" />
+          </div>
+          <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">
+            Save Movie
+          </button>
+        </div>
+      </form>
+    
+    </div>
+    
     }
-  </div>
-
-</div>
-
-<!-- movie add item by ng-template  -->
-
-@if(isItem == false){
-
-<div class="mt-10 h-screen w-screen flex items-center justify-center  dark:bg-gray-800 bg-white">
-  <!-- forms details  -->
-  <form [formGroup]="addItemForm">
-    <div class="rounded-lg shadow-gray-700 shadow-md dark:shadow-teal-300 w-[350px] p-3">
-
-      <div class="mb-4">
-        <label class="block dark:text-white text-gray-700">Title</label>
-        <input formControlName="title" type="text" class="w-full border rounded px-2 py-1" />
-      </div>
-      <div class="mb-4">
-        <label class="block dark:text-white text-gray-700">Description</label>
-        <textarea formControlName="description" class="w-full border rounded px-2 py-1 line-clamp-2"></textarea>
-      </div>
-      <div class="mb-4">
-        <label class="block dark:text-white text-gray-700">Image</label>
-        <!-- <img src="/assets/images/virus.webp" alt=""> -->
-        <input type="file" (change)="onImageSelected($event)" class="w-full border rounded px-2 py-1" />
-      </div>
-      <div class="mb-4">
-        <label class="block dark:text-white text-gray-700">Genres</label>
-        <input formControlName="genres" type="text" class="w-full border rounded px-2 py-1" />
-      </div>
-      <div class="mb-4">
-        <label class="block dark:text-white text-gray-700">Release Date</label>
-        <input formControlName="releaseDate" type="date" class="w-full border rounded px-2 py-1" />
-      </div>
-      <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded" (click)="onSubmit()">
-        Save Movie
-      </button>
-    </div>
-  </form>
-
-</div>
-
-}
+  <!-- </div> -->

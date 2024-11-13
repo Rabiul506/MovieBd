@@ -21,12 +21,12 @@
                         </div>
                     </div> -->
 
-                    <div class="relative w-80 h-52 flex-shrink-0 rounded-lg hover:scale-110 z-40 overflow-hidden bg-cover bg-center hover:transition-all duration-300"
-                    [ngStyle]="{ 'background-image': 'url(' + movie.images + ')' }">
+                    <div class="relative w-80 cursor-pointer h-52 flex-shrink-0 rounded-lg hover:scale-110 z-40 overflow-hidden bg-cover bg-center hover:transition-all duration-300"
+                    [ngStyle]="{ 'background-image': 'url(' + movie.images + ')' }" (click)="navigatetoDetail(i)">
                  
                  <!-- Overlay for title and other details -->
                  <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 p-4 flex flex-col justify-end">
-                   <div class="text-white font-bold" (click)="navigatetoDetail(i)">{{ movie.title }}</div>
+                   <div class="text-white font-bold">{{ movie.title }}</div>
                    <div class="text-sm text-gray-300"><span class="text-white font-semibold">Genre : </span> {{ movie.genres }}</div>
                    <div class="text-xs text-gray-400">{{ movie.releaseDate }}</div>
                  </div>
