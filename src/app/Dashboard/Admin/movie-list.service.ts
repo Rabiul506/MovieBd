@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { MovieItem } from '../User/itemData';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MovieListService {
+export class MovieListService{
   id!: number;
   title!: string;
   // movieListSubject: any;
@@ -76,25 +76,27 @@ export class MovieListService {
     return this.movieList;
   }
 
-      // Create or update an item
-      setItem(key: string, value: any): void {
-        localStorage.setItem(key, JSON.stringify(value));
-      }
-    
-      // Read an item
-      getItem(key: string): any {
-        const item = localStorage.getItem(key);
-        return item ? JSON.parse(item) : null;
-      }
+  // Create or update an item
+  setItem(key: string, value: any, movie: MovieItem): void {
+    localStorage.setItem(key, JSON.stringify(value));
+    this.movieList.push(movie);
+    this.movieListSubject.next([...this.movieList]); // Notify subscribers
+  }
+
+  // Read an item
+  getItem(key: string): any {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : null;
+  }
 
   // Update an item (if needed, specific to structure)
-  updateItem(movie: string, updateFn: (currentValue: any) => any): void {
-    const currentValue = this.getItem(movie);
-    if (currentValue !== null) {
-      const updatedValue = updateFn(currentValue);
-      this.setItem(movie, updatedValue);
-    }
-  }
+  // updateItem(movie: string, updateFn: (currentValue: any) => any): void {
+  //   const currentValue = this.getItem(movie);
+  //   if (currentValue !== null) {
+  //     const updatedValue = updateFn(currentValue);
+  //     this.setItem(movie, updatedValue);
+  //   }
+  // }
 
   // deleteMovie(movie:any, MovieItem:any){
   //   // localStorage.removeItem()
@@ -108,4 +110,14 @@ export class MovieListService {
     removeItem(key: string): void {
       localStorage.removeItem(key);
     }
+
+    // let arr = [1, 2, 3, 4];
+
+    // let modifiedArr = arr.map(function(el: number){
+    //   return el * 3;
+    // });
+
+    // console.log(modifiedArr);
+    
+
 }

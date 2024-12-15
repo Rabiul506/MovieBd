@@ -14,23 +14,10 @@ import { MovieListService } from '../movie-list.service';
 })
 export class ListItemComponent implements OnInit{
 
+  addItemForm: FormGroup;
   isItem: boolean = true;
   movieList: MovieItem [] = [];
   // movieList: MovieListService [] = [];
-
-
-  showItem(){
-    this.isItem = !this.isItem;
-  }
-
-  ngOnInit() {
-    this.movieList = this.ml.movieList;
-
-  
-  }
- 
-
-  addItemForm: FormGroup;
 
   constructor(
     private ml: MovieListService,
@@ -40,15 +27,6 @@ export class ListItemComponent implements OnInit{
 
       this.ml.movieList = temperMovieList? JSON.parse(temperMovieList): [];
 
-      // const tempMovie = 
-
-    // this.addItemForm = new FormGroup({
-    //   title: new FormControl('', Validators.required),
-    //   description: new FormControl('', Validators.required),
-    //   images : new FormArray([]),
-    //   genres: new FormControl('', Validators.required),
-    //   releaseDate: new FormControl('', Validators.required)
-    // })
     this.addItemForm = this.fb.group({
       title: [''],
       description: [''],
@@ -56,6 +34,19 @@ export class ListItemComponent implements OnInit{
       genres: [''],
       releaseDate: [''],
     });
+  }
+
+  ngOnInit() {
+    this.movieList = this.ml.movieList;
+    const userFullnames = this.users.map(function(element){
+      return `${element.firstName} ${element.lastName}`;
+    })
+    
+    console.log(userFullnames);
+  }
+
+  showItem(){
+    this.isItem = !this.isItem;
   }
   // tempMovies!: any []
 
@@ -102,6 +93,12 @@ removeItem(i: number){
 // togleColor(){
 //   this.isColor = !this.isColor
 // }
+
+users: any [] = [
+  {firstName : "Susan", lastName: "Steward"},
+  {firstName : "Daniel", lastName: "Longbottom"},
+  {firstName : "Jacob", lastName: "Black"}
+];
 
 
 }

@@ -28,7 +28,7 @@
         @for( movie of movieList; track movie; let i = $index ){
     
         <div
-          class="relative w-80 h-52 flex-shrink-0 rounded-lg hover:scale-110 z-40 overflow-hidden bg-cover bg-center hover:transition-all duration-300"
+          class="relative border-2 border-gray-700 w-80 h-52 flex-shrink-0 rounded-lg hover:scale-110 z-40 overflow-hidden bg-cover bg-center hover:transition-all duration-300"
           [ngStyle]="{ 'background-image': 'url(' + movie.images + ')' }">
     
           <div
